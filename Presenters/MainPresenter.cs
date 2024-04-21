@@ -24,7 +24,7 @@ namespace Supermarker_mvp.Presenters
 
         private void ShowPayModeView(object? sender, EventArgs e) 
         {
-            IPayModeView view = new PayModeView();
+            IPayModeView view = PayModeView.GetInstance((MainView)mainView);
             IPayModeRepository repository = new PayModeRepository(sqlConnectionString);
             new PayModePresenter(view, repository);
         }
