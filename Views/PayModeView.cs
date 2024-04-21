@@ -22,6 +22,8 @@ namespace Supermarker_mvp.Views
             AssociateAndRaiseViewEvent();
 
             tabControl1.TabPages.Remove(tabPagePayModeDetail);
+
+            BtnClose.Click += delegate { this.Close(); };
         }
 
         private void AssociateAndRaiseViewEvent()
@@ -63,7 +65,10 @@ namespace Supermarker_mvp.Views
             if (instance == null || instance.IsDisposed)
             {
                 instance = new PayModeView();
-                instance.MdiParent = parentContainer;
+               // instance.MdiParent = parentContainer;
+
+                instance.FormBorderStyle = FormBorderStyle.None;
+                instance.Dock = DockStyle.Fill;
             }
             else
             {
