@@ -58,11 +58,12 @@ namespace Supermarker_mvp.Views
         //Patron Singleton 
         private static PayModeView instance;
 
-        public static PayModeView GetInstance()
+        public static PayModeView GetInstance(Form parentContainer)
         {
             if (instance == null || instance.IsDisposed)
             {
                 instance = new PayModeView();
+                instance.MdiParent = parentContainer;
             }
             else
             {
