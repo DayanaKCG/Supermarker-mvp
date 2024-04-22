@@ -32,8 +32,17 @@ namespace Supermarker_mvp.Views
 
             TxtSearch.KeyDown += (s, e) =>
             {
-                if (e.KeyCode == Keys.Enter) { SearchEvent?.Invoke(this, EventArgs.Empty); }
+                if (e.KeyCode == Keys.Enter)
+                { SearchEvent?.Invoke(this, EventArgs.Empty);
+                }
             };
+
+            BtnNew.Click += delegate { AddNewEvent?.Invoke(this, EventArgs.Empty); };
+
+            BtnEdit.Click += delegate { EditedEvent?.Invoke(this, EventArgs.Empty); };
+            BtnDelete.Click += delegate { DeleteEvent?.Invoke(this, EventArgs.Empty); };
+            BtnSave.Click += delegate { SaveEvent?.Invoke(this, EventArgs.Empty); };
+            BtnCancel.Click += delegate { CancelEvent?.Invoke(this, EventArgs.Empty); };
 
         }
 
