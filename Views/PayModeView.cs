@@ -37,11 +37,35 @@ namespace Supermarker_mvp.Views
                 }
             };
 
-            BtnNew.Click += delegate { AddNewEvent?.Invoke(this, EventArgs.Empty); };
+            BtnNew.Click += delegate {
+                AddNewEvent?.Invoke(this, EventArgs.Empty); 
 
-            BtnEdit.Click += delegate { EditedEvent?.Invoke(this, EventArgs.Empty); };
+            tabControl1.TabPages.Remove(tabPagePayModeList);
+            tabControl1.TabPages.Add(tabPagePayModeDetail);
+            tabPagePayModeDetail.Text = "Add New Pay Mode"; //Cambia titulo de la pestaña   
+            };
+
+            BtnEdit.Click += delegate {
+                EditedEvent?.Invoke(this, EventArgs.Empty);
+
+                tabControl1.TabPages.Remove(tabPagePayModeList);
+                tabControl1.TabPages.Add(tabPagePayModeDetail);
+                tabPagePayModeDetail.Text = "Edit Pay Mode"; // Cambia titulo a la pestaña  
+
+            };
             BtnDelete.Click += delegate { DeleteEvent?.Invoke(this, EventArgs.Empty); };
-            BtnSave.Click += delegate { SaveEvent?.Invoke(this, EventArgs.Empty); };
+
+            BtnSave.Click += delegate {
+                SaveEvent?.Invoke(this, EventArgs.Empty);
+
+                if (isSuccessful) // Si guardar es exitoso
+                {
+                    tabControl1.TabPages.Remove(tabPagePayModeDetail);
+                    tabControl1.TabPages.Add(tabPagePayModeList);
+                }
+               // MessageBox.Show(Message);
+            
+            };
             BtnCancel.Click += delegate { CancelEvent?.Invoke(this, EventArgs.Empty); };
 
         }
