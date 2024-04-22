@@ -53,7 +53,19 @@ namespace Supermarker_mvp.Views
                 tabPagePayModeDetail.Text = "Edit Pay Mode"; // Cambia titulo a la pestaña  
 
             };
-            BtnDelete.Click += delegate { DeleteEvent?.Invoke(this, EventArgs.Empty); };
+            BtnDelete.Click += delegate
+            {
+                //DeleteEvent?.Invoke(this, EventArgs.Empty); };
+                var result = MessageBox.Show(
+                    "Are you sure you want to delete the selected Pay Mode",
+                    "Warning",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
+                {
+                    DeleteEvent?.Invoke(this, EventArgs.Empty);
+                   // MessageBox.Show(Message);
+                }
+            };
 
             BtnSave.Click += delegate {
                 SaveEvent?.Invoke(this, EventArgs.Empty);
@@ -66,7 +78,13 @@ namespace Supermarker_mvp.Views
                // MessageBox.Show(Message);
             
             };
-            BtnCancel.Click += delegate { CancelEvent?.Invoke(this, EventArgs.Empty); };
+            BtnCancel.Click += delegate {
+                CancelEvent?.Invoke(this, EventArgs.Empty);
+
+                tabControl1.TabPages.Remove(tabPagePayModeDetail);
+                tabControl1.TabPages.Add(tabPagePayModeList);
+            
+            };
 
         }
 
