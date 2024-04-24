@@ -48,7 +48,31 @@ namespace Supermarker_mvp.Presenters
 
         private void SavePayMode(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            //Crea el objeto de la clase PayModeModel y asigna datos
+            //de las cajas de texto vista
+            var payMode = new PayModeModel();
+            payMode.Id = Convert.ToInt32(view.PayModeId);
+            payMode.Name = view.PayModeName;
+            payMode.Observation = view.PayModeObservation;
+
+            try
+            {
+                if (view.IsEdit)
+                {
+                    repository.Edit(payMode);
+                    view.Message = "PayMode edited successfuly";
+                }
+                else
+                {
+                    repository.Add(payMode);
+                    view.Message = "PayMode added successfuly";
+                }
+            }
+            catch (Exception ex) 
+            {
+                view.IsSuccessful = false;
+                view.Message = ex.Message;
+            }
         }
 
         private void DeleteSelectedPayMode(object? sender, EventArgs e)
