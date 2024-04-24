@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-//using Microsoft.Data.SqlClient;
-//using Microsoft.Data;
+using Microsoft.Data.SqlClient;
+using Microsoft.Data;
 //using Supermarker_mvp.Model;
 using System.Data;
 using Supermarker_mvp.Models;
@@ -20,7 +20,16 @@ namespace Supermarker_mvp._Repositories
         }
         public void Add(PayModeModel payModeModel)
         {
-            throw new NotImplementedException();
+            using (var connection = new SqlConnection(connectionString));
+            using (var Command = new SqlCommand())
+            {
+                //connection.Open();
+               // Command.Connection = connection;
+                Command.CommandText = "INSERT INTO PayMode VALUES (@name, @observation)";
+                Command.Parameters.Add("@name", SqlDbType.NVarChar).Value = payModeModel.Name;
+                Command.Parameters.Add("@observation", SqlDbType.NVarChar).Value = payModeModel.Observation;
+
+            }
         }
 
         public void Delete(int id)
