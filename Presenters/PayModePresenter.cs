@@ -43,7 +43,7 @@ namespace Supermarker_mvp.Presenters
 
         private void CancelAction(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            CleanViewFields();
         }
 
         private void SavePayMode(object? sender, EventArgs e)
@@ -68,6 +68,9 @@ namespace Supermarker_mvp.Presenters
                     repository.Add(payMode);
                     view.Message = "PayMode added successfuly";
                 }
+                view.IsSuccessful = true;
+                loadAllPayModeList();
+                CleanViewFields();
             }
             catch (Exception ex) 
             {
@@ -76,9 +79,29 @@ namespace Supermarker_mvp.Presenters
             }
         }
 
+        private void CleanViewFields()
+        {
+            view.PayModeId = "0";
+            view.PayModeName = "";
+            view.PayModeObservation = "";
+        }
+
         private void DeleteSelectedPayMode(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var payMode = (PayModeModel)payModeBindingSource.Current; //Recupera el objeto de la fila seleccionada del dataviewwgrid
+
+                repository.Delete(payMode.Id);
+                view.IsSuccessful = true;
+                view.Message = "Pay Mode Id delete successfully";
+                loadAllPayModeList();
+            }
+            catch (Exception ex)
+            {
+                view.IsSuccessful = false;
+                view.Message = "An error ocurred, could not delete pay mode";
+            }
         }
 
         private void LoadSelectPayModeToEdit(object? sender, EventArgs e)
@@ -94,7 +117,7 @@ namespace Supermarker_mvp.Presenters
 
         private void AddNewPayMode(object? sender, EventArgs e)
         {
-            // MessageBox.Show("Hizo clic en el boton nuevo");
+            MessageBox.Show("Hizo clic en el boton nuevo");
             view.IsEdit = false;
         }
 

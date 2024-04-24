@@ -35,7 +35,15 @@ namespace Supermarker_mvp._Repositories
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            using (var connection= new SqlConnection(connectionString))
+            using (var Command = new SqlCommand())
+            {
+                connection.Open();
+                Command.Connection = connection;
+                Command.CommandText = "DELETE FROM PayMode WHERE Pay_Mode_Id = @id";
+                Command.Parameters.Add("@id", SqlDbType.Int).Value = id;
+                Command.ExecuteNonQuery();
+            }
         }
 
 
@@ -118,9 +126,5 @@ namespace Supermarker_mvp._Repositories
             return payModeList;
         }
 
-       /* public IEnumerable<PayModeModel> GetByValue(string searchValue)
-        {
-            throw new NotImplementedException();
-        }*/
     }
 }
