@@ -58,7 +58,13 @@ namespace Supermarker_mvp.Presenters
 
         private void LoadSelectPayModeToEdit(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            var payMode = (PayModeModel)payModeBindingSource.Current;
+
+            view.PayModeId = payMode.Id.ToString(); // cambia el contenidode las cajas de texto
+            view.PayModeName = payMode.Name;
+            view.PayModeObservation = payMode.Observation;
+
+            view.IsEdit = true; // establece el modo de edicion
         }
 
         private void AddNewPayMode(object? sender, EventArgs e)
