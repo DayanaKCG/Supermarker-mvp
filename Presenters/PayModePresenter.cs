@@ -57,6 +57,7 @@ namespace Supermarker_mvp.Presenters
 
             try
             {
+                new Common.ModelDataValidation().Validacion(payMode);
                 if (view.IsEdit)
                 {
                     repository.Edit(payMode);
